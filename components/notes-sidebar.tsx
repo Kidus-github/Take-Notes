@@ -13,22 +13,28 @@ import { Note } from "@/lib/type";
 import { Button } from "./ui/button";
 import { formatDate } from "@/lib/storage";
 import { Trash2 } from "lucide-react";
+import { create } from "domain";
 interface NotesSidebarProps {
   notes: Note[];
   onSelectNote: (note: Note) => void;
+  createNewNote?: () => void;
 }
-function NotesSidebar({ notes, onSelectNote }: NotesSidebarProps) {
+function NotesSidebar({
+  notes,
+  onSelectNote,
+  createNewNote,
+}: NotesSidebarProps) {
   return (
-    <Card>
+    <Card className="h-full">
       <CardHeader>
         <CardTitle>My Notes</CardTitle>
-        {/* <CardAction>Card Action</CardAction> */}
       </CardHeader>
       <CardContent>
         {notes.length === 0 ? (
           <EmptyState
             message="No notes yet"
             buttonText="Create your first note"
+            onButtonClick={createNewNote}
           />
         ) : (
           notes.map((note) => (

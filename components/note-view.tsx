@@ -1,13 +1,22 @@
 import { Note } from "@/lib/type";
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
 import { formatDate } from "@/lib/storage";
+import { Pen } from "lucide-react";
+import { Button } from "./ui/button";
 
 interface NoteViewProps {
   note: Note | null;
+  onEdit: () => void;
 }
 
-function NoteView({ note }: NoteViewProps) {
+function NoteView({ note, onEdit }: NoteViewProps) {
   return (
     <Card>
       <CardHeader>
@@ -17,6 +26,12 @@ function NoteView({ note }: NoteViewProps) {
         </p>
       </CardHeader>
       <CardContent>{note?.content}</CardContent>
+      <CardFooter className="flex justify-end">
+        <Button onClick={onEdit}>
+          <Pen className="h-4 w-4 mr-2" />
+          Edit Note
+        </Button>
+      </CardFooter>
     </Card>
   );
 }
