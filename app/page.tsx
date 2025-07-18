@@ -25,6 +25,7 @@ export default function Home() {
 
   const renderNoteContent = () => {
     if (!selectedNote && notes.length === 0) {
+      console.log("No notes available");
       return (
         <EmptyState
           message={"Create your first Note to get started"}
@@ -52,6 +53,14 @@ export default function Home() {
     setIsEditing(false);
   };
 
+  const deleteNote = (noteId: string) => {
+    setNotes(notes.filter((note) => note.id !== noteId));
+    if (selectedNote && selectedNote?.id === noteId) {
+      setSelectedNote(null);
+      setIsEditing(false);
+    }
+  };
+
   const [notes, setNotes] = useState<Note[]>([]);
   const [selectedNote, setSelectedNote] = useState<Note | null>(null);
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -65,6 +74,8 @@ export default function Home() {
             notes={notes}
             onSelectNote={selectedNoteHandler}
             createNewNote={createNewNote}
+            onDeleteNote={deleteNote}
+            activeNoteId={selectedNote?.id || ""}
           />
         </div>
         <div className="md:col-span-2">

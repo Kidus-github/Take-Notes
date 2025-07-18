@@ -43,7 +43,7 @@ function NoteEditor({ note, onCancel, onSave }: NoteEditorProps) {
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="Write your note here..."
-          className="w-full min-h-[calc(100vh-350px)] resize-none border-none focus-visible:ring-0 focus-visible:outline-none focus-visible:border-none focus-visible:shadow-none"
+          className="w-full h-[calc(100vh-350px)] resize-none border-none focus-visible:ring-0 focus-visible:outline-none focus-visible:border-none focus-visible:shadow-none"
         />
       </CardContent>
       <CardFooter className="flex justify-end space-x-2">

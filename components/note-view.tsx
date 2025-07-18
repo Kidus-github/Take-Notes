@@ -10,6 +10,7 @@ import {
 import { formatDate } from "@/lib/storage";
 import { Pen } from "lucide-react";
 import { Button } from "./ui/button";
+import { ScrollArea } from "./ui/scroll-area";
 
 interface NoteViewProps {
   note: Note | null;
@@ -25,7 +26,11 @@ function NoteView({ note, onEdit }: NoteViewProps) {
           Updated Date: {formatDate(note?.updatedAt ?? new Date())}
         </p>
       </CardHeader>
-      <CardContent>{note?.content}</CardContent>
+      <CardContent>
+        <ScrollArea className="h-[calc(100vh-350px)]">
+          <div>{note?.content}</div>
+        </ScrollArea>
+      </CardContent>
       <CardFooter className="flex justify-end">
         <Button onClick={onEdit}>
           <Pen className="h-4 w-4 mr-2" />
