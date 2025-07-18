@@ -5,11 +5,25 @@ import NoteEditor from "@/components/note-editor";
 import NoteView from "@/components/note-view";
 import NotesSidebar from "@/components/notes-sidebar";
 import { Button } from "@/components/ui/button";
+import { loadNotes, saveNotes } from "@/lib/storage";
 import { Note } from "@/lib/type";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    saveNotes(notes);
+    [notes];
+  });
+
+  useEffect(() => {
+    const initialNotes = loadNotes();
+    setNotes(initialNotes);
+    if (initialNotes.length > 0) {
+      setSelectedNote(initialNotes[0]);
+    }
+  }, []);
+
   const createNewNote = () => {
     const newNote: Note = {
       id: Date.now().toString(),
