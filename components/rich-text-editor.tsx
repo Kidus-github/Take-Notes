@@ -10,10 +10,6 @@ function RichTextEditor(
   content: string,
   setContent: React.Dispatch<React.SetStateAction<string>>
 ) {
-  console.log(
-    "Editor initialized with content:",
-    content.length == 0 || content == "<p></p>"
-  );
   const editor = useEditor({
     extensions: [
       StarterKit.configure({

@@ -1,3 +1,4 @@
+"use-client";
 import { Note } from "@/lib/type";
 import React from "react";
 import {
