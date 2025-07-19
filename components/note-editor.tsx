@@ -5,6 +5,8 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Save, X } from "lucide-react";
 import { Button } from "./ui/button";
+import NoteTextField from "./note-text-field";
+import RichTextEditor from "./rich-text-editor";
 interface NoteEditorProps {
   note: Note;
   onCancel: () => void;
@@ -39,12 +41,8 @@ function NoteEditor({ note, onCancel, onSave }: NoteEditorProps) {
         />
       </CardHeader>
       <CardContent>
-        <Textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="Write your note here..."
-          className="w-full h-[calc(100vh-350px)] resize-none border-none focus-visible:ring-0 focus-visible:outline-none focus-visible:border-none focus-visible:shadow-none"
-        />
+        {/* {NoteTextField(content, setContent)} */}
+        {RichTextEditor(content, setContent)}
       </CardContent>
       <CardFooter className="flex justify-end space-x-2">
         <Button variant="outline" onClick={onCancel}>
@@ -59,5 +57,4 @@ function NoteEditor({ note, onCancel, onSave }: NoteEditorProps) {
     </Card>
   );
 }
-
 export default NoteEditor;

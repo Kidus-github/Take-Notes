@@ -11,6 +11,7 @@ import { formatDate } from "@/lib/storage";
 import { Pen } from "lucide-react";
 import { Button } from "./ui/button";
 import { ScrollArea } from "./ui/scroll-area";
+import DOMPurify from "dompurify";
 
 interface NoteViewProps {
   note: Note | null;
@@ -28,7 +29,11 @@ function NoteView({ note, onEdit }: NoteViewProps) {
       </CardHeader>
       <CardContent>
         <ScrollArea className="h-[calc(100vh-350px)]">
-          <div>{note?.content}</div>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(note?.content || ""),
+            }}
+          />
         </ScrollArea>
       </CardContent>
       <CardFooter className="flex justify-end">
