@@ -13,8 +13,9 @@ import { Note } from "@/lib/type";
 import { Button } from "./ui/button";
 import { formatDate } from "@/lib/storage";
 import { Trash2 } from "lucide-react";
-import { create } from "domain";
 import { ScrollArea } from "./ui/scroll-area";
+import DOMPurify from "dompurify";
+
 interface NotesSidebarProps {
   notes: Note[];
   onSelectNote: (note: Note) => void;
@@ -60,10 +61,14 @@ function NotesSidebar({
                         {note.title.substring(0, 30) || "Untitled Note"}
                         {note.title.length > 30 ? "..." : ""}
                       </h3>
-                      <p className="text-sm text-muted-foreground">
-                        {note.content.substring(0, 40) || "No Text Found"}
-                        {note.content.length > 40 ? "..." : ""}
-                      </p>
+                      <div
+                        className="text-sm text-muted-foreground"
+                        dangerouslySetInnerHTML={{
+                          __html: DOMPurify.sanitize(
+                            note?.content || "No Text Found"
+                          ),
+                        }}
+                      />
                       <p className="text-sm text-muted-foreground">
                         {formatDate(note.createdAt)}
                       </p>
